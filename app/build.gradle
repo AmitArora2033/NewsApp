@@ -1,0 +1,60 @@
+import gradle.Dependencies
+
+apply plugin: 'com.android.application'
+
+android {
+  compileSdkVersion 28
+  defaultConfig {
+    applicationId "com.newsapp.newsapp"
+    minSdkVersion 19
+    targetSdkVersion 28
+    versionCode 1
+    versionName "1.0"
+    testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+  }
+  buildTypes {
+    release {
+      minifyEnabled false
+      proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+    }
+  }
+  compileOptions {
+    sourceCompatibility JavaVersion.VERSION_1_8
+    targetCompatibility JavaVersion.VERSION_1_8
+  }
+}
+
+dependencies {
+  implementation fileTree(dir: 'libs', include: ['*.jar'])
+  implementation 'com.android.support:appcompat-v7:28.0.0'
+  implementation 'com.android.support.constraint:constraint-layout:1.1.3'
+  testImplementation 'junit:junit:4.12'
+  androidTestImplementation 'com.android.support.test:runner:1.0.2'
+  androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+
+
+  implementation project(":base")
+
+  implementation Dependencies.DAGGER
+  annotationProcessor  Dependencies.DAGGER_ANNOTATION_PROCESSOR
+  implementation Dependencies.DAGGER_SUPPORT
+  annotationProcessor Dependencies.DAGGER_COMPILER
+  implementation Dependencies.RECYCER_VIEW
+  implementation Dependencies.RETORIFT
+  implementation Dependencies.RETROFIT_CONVERTER
+  implementation Dependencies.OKHTTP
+  implementation Dependencies.RETROFIT_RX_JAVA_ADAPTER
+  implementation Dependencies.CARD_VIEW
+  implementation Dependencies.DESIGN_SUPPORT
+  annotationProcessor Dependencies.GLIDE_COMPILER
+  implementation Dependencies.GLIDE
+
+  implementation Dependencies.AUTO_VALUE
+  annotationProcessor Dependencies.AUTO_VALUE_ANNOTATION
+  annotationProcessor Dependencies.AUTO_VALUE_ANNOTATION_PARSEL
+  annotationProcessor Dependencies.AUTOVALUE_WITH_COMPILER
+  implementation Dependencies.GSON
+  annotationProcessor Dependencies.BUTTER_KNIFE_ANNOTATION
+
+  annotationProcessor Dependencies.SUPPORT_ANNOTATION
+}

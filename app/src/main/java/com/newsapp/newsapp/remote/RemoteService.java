@@ -10,6 +10,4 @@ public interface RemoteService {
   @GET("v2/top-headlines")
   Single<NewsResponse> getNewsHeadlines(@Query("country") String country,
       @Query("apiKey") String apiKey);
-
-
 }

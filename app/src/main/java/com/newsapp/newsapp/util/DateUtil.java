@@ -8,7 +8,6 @@ import java.util.Locale;
 
 public class DateUtil {
 
-  //"2019-07-27T09:39:00Z"
   public static final String SERVER_DATE_TIME = "yyyy-MM-dd'T'HH:mm:ss'Z'";
   public static final String READABLE_DATE = "dd-MM-yyyy";
   private static final String TAG = DateUtil.class.getSimpleName();

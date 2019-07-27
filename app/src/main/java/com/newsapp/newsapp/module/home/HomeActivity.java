@@ -5,16 +5,12 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import butterknife.BindView;
 import com.newsapp.mylibrary.BaseActivity;
-import com.newsapp.newsapp.App;
 import com.newsapp.newsapp.R;
 import com.newsapp.newsapp.module.headlines.NewsHeadlineFragment;
-import com.newsapp.newsapp.module.home.adapter.NewsAdapter;
 
 public class HomeActivity extends BaseActivity {
 
   @BindView(R.id.toolbar) Toolbar toolbar;
-  private HomeViewModel viewModel;
-  private NewsAdapter adapter;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -26,7 +22,7 @@ public class HomeActivity extends BaseActivity {
   }
 
   @Override public void initDependencies() {
-    App.get(this).getComponent().inject(this);
+
   }
 
   @Override public void onReady() {

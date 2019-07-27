@@ -66,7 +66,6 @@ import retrofit2.converter.gson.GsonConverterFactory;
   }
 
   @Provides @Singleton Retrofit provideRetrofit(Retrofit.Builder builder) {
-
-    return builder.baseUrl("").build();
+    return builder.baseUrl("https://newsapi.org/").build();
   }
 }

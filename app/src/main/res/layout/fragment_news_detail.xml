@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    >
+  <com.google.android.material.appbar.AppBarLayout
+      android:id="@+id/app_bar"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:background="@android:color/transparent"
+      android:orientation="vertical"
+      >
+    <com.google.android.material.appbar.CollapsingToolbarLayout
+        android:id="@+id/collapsing_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clipToPadding="false"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        app:layout_collapseMode="pin"
+        app:layout_scrollFlags="scroll|exitUntilCollapsed"
+        >
+
+      <RelativeLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          >
+        <ImageView
+            android:id="@+id/img_news"
+            android:layout_width="match_parent"
+            android:layout_height="420dp"
+            android:adjustViewBounds="true"
+            android:scaleType="fitXY"
+            app:layout_collapseMode="pin"
+            />
+
+        <TextView
+            android:id="@+id/tv_headline"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="@dimen/padding_xlarge32"
+            android:background="@drawable/drawable_text_background"
+            android:paddingStart="@dimen/padding_xlarge"
+            android:textAppearance="@style/Headline"
+            android:textColor="@color/color_off_white"
+            />
+      </RelativeLayout>
+      <androidx.appcompat.widget.Toolbar
+          android:id="@+id/toolbar"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:clipToPadding="false"
+          app:navigationIcon="@drawable/background_circle"
+          >
+      </androidx.appcompat.widget.Toolbar>
+    </com.google.android.material.appbar.CollapsingToolbarLayout>
+  </com.google.android.material.appbar.AppBarLayout>
+
+  <androidx.core.widget.NestedScrollView
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:layout_below="@+id/collapsing_toolbar"
+      android:background="@color/description_background"
+      app:layout_behavior="@string/appbar_scrolling_view_behavior"
+      >
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/padding_xlarge"
+        android:layout_marginTop="@dimen/padding_xlarge32"
+        >
+      <TextView
+          android:id="@+id/tv_source"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_alignParentStart="true"
+          android:layout_alignParentTop="true"
+          android:layout_marginRight="@dimen/padding_medium"
+          android:layout_toLeftOf="@+id/tv_date"
+          android:textAppearance="@style/caption"
+          android:textColor="@color/color_off_white"
+          tools:text="some source form facebook"
+          />
+
+      <TextView
+          android:id="@+id/tv_date"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_alignParentEnd="true"
+          android:layout_alignParentTop="true"
+          android:textAppearance="@style/caption"
+          android:textColor="@color/color_off_white"
+          tools:text="this is a date"
+          />
+
+      <TextView
+          android:id="@+id/tv_description"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_below="@id/tv_source"
+          android:layout_marginTop="@dimen/padding_large"
+          android:textAppearance="@style/description"
+          android:textColor="@color/color_grey_text"
+          />
+
+    </RelativeLayout>
+
+
+  </androidx.core.widget.NestedScrollView>
+
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

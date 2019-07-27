@@ -2,7 +2,6 @@ package com.newsapp.mylibrary;
 
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.widget.Toast;
 import androidx.annotation.LayoutRes;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,6 +17,7 @@ public abstract class BaseActivity extends AppCompatActivity {
   @Override public void setContentView(@LayoutRes int resId) {
     super.setContentView(resId);
     ButterKnife.bind(this);
+    initViewModel();
     onReady();
   }
 
@@ -29,9 +29,9 @@ public abstract class BaseActivity extends AppCompatActivity {
     return super.onOptionsItemSelected(item);
   }
 
-
-
   public abstract void initDependencies();
 
   public abstract void onReady();
+
+  protected abstract void initViewModel();
 }

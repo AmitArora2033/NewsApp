@@ -22,6 +22,5 @@ public class App extends Application {
     appComponent = DaggerAppComponent.builder().application(this).build();
 
     appComponent.inject(this);
-
   }
 }

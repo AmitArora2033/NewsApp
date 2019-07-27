@@ -6,6 +6,7 @@ import javax.inject.Inject;
 
 public class HomeViewModel extends BaseViewModel {
 
+  private static final String TAG = HomeViewModel.class.getSimpleName();
   private final Repository repository;
 
   @Inject public HomeViewModel(Repository repository) {

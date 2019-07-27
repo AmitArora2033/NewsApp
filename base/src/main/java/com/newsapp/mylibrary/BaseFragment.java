@@ -15,6 +15,10 @@ public abstract class BaseFragment extends Fragment implements BaseView {
 
   @Override public void onCreate(@Nullable Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
+    initDependencies();
+    initViewModels();
+    initObservers();
+    initDataCalls();
   }
 
   @Nullable @Override
@@ -31,16 +35,18 @@ public abstract class BaseFragment extends Fragment implements BaseView {
 
   @Override public void onActivityCreated(@Nullable Bundle savedInstanceState) {
     super.onActivityCreated(savedInstanceState);
-    initDependencies();
     onReady(savedInstanceState);
   }
 
   @Override public void onDestroy() {
     super.onDestroy();
-    detachView();
   }
 
-  protected abstract void detachView();
+  protected abstract void initDataCalls();
+
+  protected abstract void initObservers();
+
+  protected abstract void initViewModels();
 
   public abstract @LayoutRes int getContentLayout();
 

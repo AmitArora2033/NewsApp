@@ -8,6 +8,6 @@ import retrofit2.http.Query;
 public interface RemoteService {
 
   @GET("v2/top-headlines")
-  Single<NewsResponse> getNewsHeadlines(@Query("country") String country,
+  Single<NewsResponse> getNewsHeadlines(@Query("country") String country, @Query("page") int pageNo,
       @Query("apiKey") String apiKey);
 }

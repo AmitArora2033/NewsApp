@@ -27,16 +27,16 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
   }
 
   public void addData(ArrayList<News.Article> news) {
+    int pos = newsList.size() - 1;
     this.newsList.addAll(news);
     if (newsList.size() > 0) {
-      notifyItemRangeInserted(news.size() - 1, news.size());
+      notifyItemRangeInserted(pos, news.size());
     } else {
       notifyDataSetChanged();
     }
   }
 
-
-  public List<News.Article> getNewsArticleData(){
+  public List<News.Article> getNewsArticleData() {
     return newsList;
   }
 
@@ -66,7 +66,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
     void onNewsItemSelected(int selectedItemPosition);
   }
 
-  public  class ViewHolder extends RecyclerView.ViewHolder {
+  public class ViewHolder extends RecyclerView.ViewHolder {
 
     @BindView(R.id.img_news) ImageView imgHeadline;
     @BindView(R.id.tv_headline) TextView tvHeadline;

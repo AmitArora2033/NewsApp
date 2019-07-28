@@ -4,12 +4,10 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     >
-  <include layout="@layout/layout_app_bar_headlines"/>
-
-  <androidx.recyclerview.widget.RecyclerView
-      android:id="@+id/recycler_view"
+  <include layout="@layout/layout_app_bar"/>
+  <WebView
+      android:id="@+id/web_view"
       android:layout_width="match_parent"
       android:layout_height="match_parent"
-      android:background="@color/item_background"
       />
 </LinearLayout>

@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
     android:orientation="vertical"
     >
   <com.google.android.material.appbar.AppBarLayout
@@ -26,6 +27,7 @@
       <RelativeLayout
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
+          app:layout_collapseMode="pin"
           >
         <ImageView
             android:id="@+id/img_news"
@@ -53,6 +55,7 @@
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
           android:clipToPadding="false"
+          app:layout_collapseMode="pin"
           app:navigationIcon="@drawable/background_circle"
           >
       </androidx.appcompat.widget.Toolbar>
@@ -69,6 +72,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/padding_large"
         android:layout_marginStart="@dimen/padding_xlarge"
         android:layout_marginTop="@dimen/padding_xlarge32"
         >
@@ -106,6 +110,18 @@
           android:textColor="@color/color_grey_text"
           />
 
+
+      <Button
+          android:id="@+id/btn_source"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_alignParentBottom="true"
+          android:layout_marginTop="@dimen/padding_large"
+          android:layout_alignParentEnd="true"
+          android:layout_below="@id/tv_description"
+          android:text="@string/open_source"
+          style="@style/AppButton"
+          />
     </RelativeLayout>
 
 

@@ -2,11 +2,14 @@ package com.newsapp.newsapp.di;
 
 import android.content.Context;
 import androidx.lifecycle.ViewModel;
+import androidx.room.Room;
 import com.google.gson.Gson;
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import com.newsapp.mylibrary.ViewModelFactory;
 import com.newsapp.newsapp.App;
 import com.newsapp.newsapp.BuildConfig;
+import com.newsapp.newsapp.DataManager;
+import com.newsapp.newsapp.db.AppDatabase;
 import com.newsapp.newsapp.remote.RemoteService;
 import com.newsapp.newsapp.remote.Repository;
 import dagger.Module;
@@ -35,8 +38,14 @@ import retrofit2.converter.gson.GsonConverterFactory;
     return retrofit.create(RemoteService.class);
   }
 
-  @Provides @Singleton Repository provideRepository(RemoteService remoteService) {
-    return new Repository(remoteService);
+  @Provides @Singleton Repository provideRepository(RemoteService remoteService,
+      AppDatabase appDatabase) {
+    return new Repository(remoteService, appDatabase);
+  }
+
+  @Provides @Singleton DataManager provideDataManager(Repository repository,
+      AppDatabase appDatabase) {
+    return new DataManager(repository, appDatabase);
   }
 
   @Provides @Singleton HttpLoggingInterceptor provideHttpLoggingInterceptot() {
@@ -67,5 +76,10 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
   @Provides @Singleton Retrofit provideRetrofit(Retrofit.Builder builder) {
     return builder.baseUrl("https://newsapi.org/").build();
+  }
+
+  @Provides @Singleton AppDatabase provideAppDataBase(Context context) {
+    return Room.databaseBuilder(context.getApplicationContext(), AppDatabase.class, "app_db")
+        .fallbackToDestructiveMigration().build();
   }
 }

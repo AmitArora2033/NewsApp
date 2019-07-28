@@ -1,6 +1,8 @@
 package com.newsapp.newsapp.module.newsdetail;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import butterknife.BindView;
@@ -8,6 +10,8 @@ import com.bumptech.glide.Glide;
 import com.newsapp.mylibrary.BaseFragment;
 import com.newsapp.newsapp.R;
 import com.newsapp.newsapp.model.newsresponse.domain.News;
+import com.newsapp.newsapp.module.home.HomeActivity;
+import com.newsapp.newsapp.module.newssourceview.NewsSourceWebView;
 import com.newsapp.newsapp.util.DateUtil;
 
 public class NewsDetailFragment extends BaseFragment {
@@ -18,6 +22,8 @@ public class NewsDetailFragment extends BaseFragment {
   @BindView(R.id.img_news) ImageView imgNews;
   @BindView(R.id.tv_headline) TextView tvHeadlines;
   @BindView(R.id.tv_description) TextView tvDescription;
+  @BindView(R.id.btn_source) Button btnSource;
+
   @BindView(R.id.toolbar) androidx.appcompat.widget.Toolbar toolbar;
   private News.Article newsArticle;
 
@@ -69,5 +75,12 @@ public class NewsDetailFragment extends BaseFragment {
     tvSource.setText(newsArticle.author());
     tvDate.setText(DateUtil.formaReadableDate(newsArticle.publishedAt()));
     tvDescription.setText(newsArticle.description());
+    btnSource.setVisibility(newsArticle.url() != null ? View.VISIBLE : View.GONE);
+    btnSource.setOnClickListener(v -> {
+      if (newsArticle.url() != null) {
+        ((HomeActivity) getActivity()).replaceFragment(
+            NewsSourceWebView.newInstance(newsArticle.url()));
+      }
+    });
   }
 }

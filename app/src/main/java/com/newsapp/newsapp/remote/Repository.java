@@ -1,47 +1,40 @@
 package com.newsapp.newsapp.remote;
 
-import android.util.Log;
+import com.newsapp.newsapp.db.AppDatabase;
+import com.newsapp.newsapp.db.entity.ArticleEntity;
+import com.newsapp.newsapp.mapper.NewsMapper;
 import com.newsapp.newsapp.model.newsresponse.domain.News;
-import com.newsapp.newsapp.model.newsresponse.dto.newsresponse.Article;
 import com.newsapp.newsapp.util.AppConstants;
-import com.newsapp.newsapp.util.DateUtil;
 import io.reactivex.Single;
-import java.text.ParseException;
-import java.util.ArrayList;
+import io.reactivex.schedulers.Schedulers;
 
 public class Repository {
 
   private static final String TAG = Repository.class.getSimpleName();
   private final RemoteService remoteService;
+  private final AppDatabase appDataBase;
 
-  public Repository(RemoteService remoteService) {
+  public Repository(RemoteService remoteService, AppDatabase appDatabase) {
     this.remoteService = remoteService;
+    this.appDataBase = appDatabase;
   }
 
-  public Single<News> getNewsHeadlines(String country) {
-    return remoteService.getNewsHeadlines(country, AppConstants.API_KEY).map(newsResponse -> {
-      News news = null;
-      if (newsResponse.getStatus().equals("ok")) {
-        ArrayList<News.Article> articles = new ArrayList<>();
+  public Single<News> getNewsHeadlines(String country, int pageNo) {
 
-        long date = 0;
-        for (Article article : newsResponse.getArticles()) {
-          try {
-            date = DateUtil.parseDate(article.getPublishedAt());
-          } catch (ParseException e) {
-            Log.e(TAG, e.toString());
+    return remoteService.getNewsHeadlines(country, pageNo, AppConstants.API_KEY)
+        .subscribeOn(Schedulers.io())
+        .map(NewsMapper.mapDtoNewsToDomain()).map(news -> {
+          if (news.isSuccess() && pageNo == 1) {
+            appDataBase.articleDao().clearAll();
           }
-
-          articles.add(News.Article.create(article.getSource().getName(), article.getAuthor(),
-              article.getTitle(), article.getDescription(), article.getUrl(),
-              article.getUrlToImage(), date,
-              article.getContent()));
-        }
-        news = News.create(true, newsResponse.getTotalResults(), articles, "");
-      } else {
-        news = News.create(false, 0, null, newsResponse.getErrorMessage());
-      }
-      return news;
-    });
+          for (News.Article article : news.articles()) {
+            appDataBase.articleDao()
+                .insert(
+                    new ArticleEntity(article.sourceName(), article.author(), article.title(),
+                        article.description(), article.url(), article.imageURL(),
+                        article.publishedAt(), article.content(), System.currentTimeMillis()));
+          }
+          return news;
+        });
   }
 }

@@ -9,19 +9,26 @@ import com.newsapp.mylibrary.BaseFragment;
 import com.newsapp.mylibrary.ViewModelFactory;
 import com.newsapp.newsapp.App;
 import com.newsapp.newsapp.R;
+import com.newsapp.newsapp.model.newsresponse.domain.News;
 import com.newsapp.newsapp.module.home.HomeActivity;
 import com.newsapp.newsapp.module.home.adapter.NewsAdapter;
 import com.newsapp.newsapp.module.newsdetail.NewsDetailFragment;
+import com.newsapp.newsapp.util.NetworkManager;
+import com.newsapp.newsapp.util.PageScrollListener;
 import javax.inject.Inject;
 
 public class NewsHeadlineFragment extends BaseFragment
     implements NewsAdapter.NewsItemSelectedListener {
 
+  private static final String COUNTRY = "in";
+  private static int pageNo = 1;
   @BindView(R.id.recycler_view) RecyclerView recyclerView;
 
   @Inject ViewModelFactory viewModelFactory;
   private HeadlineViewModel viewModel;
   private NewsAdapter adapter;
+  private News news;
+  private boolean isLoading;
 
   public static NewsHeadlineFragment newInstance() {
     Bundle args = new Bundle();
@@ -31,13 +38,17 @@ public class NewsHeadlineFragment extends BaseFragment
   }
 
   @Override protected void initDataCalls() {
-    viewModel.getNewsFeed("in");
+    viewModel.getNewsFeed(COUNTRY, pageNo, NetworkManager.isNetworkAvailable(getContext()));
   }
 
   @Override protected void initObservers() {
     viewModel.getNewsMutableLiveData().observe(this, news -> {
+      isLoading = false;
       if (adapter != null && news != null && news.isSuccess()) {
-        adapter.addData(news.articles());
+        this.news = news;
+        if (news.articles().size() > 0) {
+          adapter.addData(news.articles());
+        }
       }
     });
   }
@@ -58,6 +69,20 @@ public class NewsHeadlineFragment extends BaseFragment
   @Override protected void onReady(Bundle savedInstanceState) {
     recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
     recyclerView.setAdapter(adapter);
+    recyclerView.addOnScrollListener(new PageScrollListener() {
+      @Override protected void loadMoreItems() {
+        isLoading = true;
+        viewModel.getNewsFeed(COUNTRY, ++pageNo, NetworkManager.isNetworkAvailable(getContext()));
+      }
+
+      @Override protected long getTotalItems() {
+        return news != null ? news.totalItems() : 0;
+      }
+
+      @Override protected boolean isLoading() {
+        return isLoading;
+      }
+    });
   }
 
   @Override public void onNewsItemSelected(int selectedItemPosition) {

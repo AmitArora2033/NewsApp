@@ -8,10 +8,12 @@ import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import com.newsapp.mylibrary.ViewModelFactory;
 import com.newsapp.newsapp.App;
 import com.newsapp.newsapp.BuildConfig;
-import com.newsapp.newsapp.DataManager;
-import com.newsapp.newsapp.db.AppDatabase;
-import com.newsapp.newsapp.remote.RemoteService;
-import com.newsapp.newsapp.remote.Repository;
+import com.newsapp.newsapp.data.DataManager;
+import com.newsapp.newsapp.data.db.AppDatabase;
+import com.newsapp.newsapp.data.db.LocalDatabase;
+import com.newsapp.newsapp.data.remote.RemoteService;
+import com.newsapp.newsapp.data.remote.Repository;
+import com.newsapp.newsapp.util.RxSingleSchedulers;
 import dagger.Module;
 import dagger.Provides;
 import java.util.Map;
@@ -39,13 +41,21 @@ import retrofit2.converter.gson.GsonConverterFactory;
   }
 
   @Provides @Singleton Repository provideRepository(RemoteService remoteService,
-      AppDatabase appDatabase) {
-    return new Repository(remoteService, appDatabase);
+      LocalDatabase localDatabase) {
+    return new Repository(remoteService, localDatabase);
   }
 
   @Provides @Singleton DataManager provideDataManager(Repository repository,
-      AppDatabase appDatabase) {
-    return new DataManager(repository, appDatabase);
+      LocalDatabase localDatabase) {
+    return new DataManager(repository, localDatabase);
+  }
+
+  @Provides @Singleton LocalDatabase provideLocalDataBase(AppDatabase appDatabase) {
+    return new LocalDatabase(appDatabase);
+  }
+
+  @Provides @Singleton RxSingleSchedulers provideRXSingleSchedulers(){
+    return RxSingleSchedulers.DEFAULT;
   }
 
   @Provides @Singleton HttpLoggingInterceptor provideHttpLoggingInterceptot() {

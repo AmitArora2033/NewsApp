@@ -1,7 +1,7 @@
-package com.newsapp.newsapp.mapper;
+package com.newsapp.newsapp.model.mapper;
 
 import android.util.Log;
-import com.newsapp.newsapp.db.entity.ArticleEntity;
+import com.newsapp.newsapp.data.db.entity.ArticleEntity;
 import com.newsapp.newsapp.model.newsresponse.domain.News;
 import com.newsapp.newsapp.model.newsresponse.dto.newsresponse.Article;
 import com.newsapp.newsapp.model.newsresponse.dto.newsresponse.NewsResponse;

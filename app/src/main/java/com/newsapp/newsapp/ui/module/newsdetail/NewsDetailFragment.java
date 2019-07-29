@@ -1,4 +1,4 @@
-package com.newsapp.newsapp.module.newsdetail;
+package com.newsapp.newsapp.ui.module.newsdetail;
 
 import android.os.Bundle;
 import android.view.View;
@@ -10,8 +10,8 @@ import com.bumptech.glide.Glide;
 import com.newsapp.mylibrary.BaseFragment;
 import com.newsapp.newsapp.R;
 import com.newsapp.newsapp.model.newsresponse.domain.News;
-import com.newsapp.newsapp.module.home.HomeActivity;
-import com.newsapp.newsapp.module.newssourceview.NewsSourceWebView;
+import com.newsapp.newsapp.ui.module.home.HomeActivity;
+import com.newsapp.newsapp.ui.module.newssourceview.NewsSourceWebView;
 import com.newsapp.newsapp.util.DateUtil;
 
 public class NewsDetailFragment extends BaseFragment {

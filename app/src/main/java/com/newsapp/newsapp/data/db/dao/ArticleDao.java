@@ -1,11 +1,11 @@
-package com.newsapp.newsapp.db.dao;
+package com.newsapp.newsapp.data.db.dao;
 
 import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
 import androidx.room.Transaction;
-import com.newsapp.newsapp.db.entity.ArticleEntity;
+import com.newsapp.newsapp.data.db.entity.ArticleEntity;
 import io.reactivex.Single;
 import java.util.List;
 

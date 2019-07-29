@@ -1,7 +1,7 @@
 package com.newsapp.newsapp.di;
 
 import com.newsapp.newsapp.App;
-import com.newsapp.newsapp.module.headlines.NewsHeadlineFragment;
+import com.newsapp.newsapp.ui.module.headlines.NewsHeadlineFragment;
 import dagger.BindsInstance;
 import dagger.Component;
 import javax.inject.Singleton;

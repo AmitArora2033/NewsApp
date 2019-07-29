@@ -1,4 +1,4 @@
-package com.newsapp.newsapp.remote;
+package com.newsapp.newsapp.data.remote;
 
 import com.newsapp.newsapp.model.newsresponse.dto.newsresponse.NewsResponse;
 import io.reactivex.Single;

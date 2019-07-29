@@ -16,7 +16,7 @@ import java.util.ArrayList;
 
   public abstract long totalItems();
 
-  public abstract ArrayList<Article> articles();
+  @Nullable public abstract ArrayList<Article> articles();
 
   @Nullable public abstract String errorMessage();
 

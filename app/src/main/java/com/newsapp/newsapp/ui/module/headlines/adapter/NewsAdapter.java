@@ -1,4 +1,4 @@
-package com.newsapp.newsapp.module.home.adapter;
+package com.newsapp.newsapp.ui.module.headlines.adapter;
 
 import android.view.LayoutInflater;
 import android.view.View;

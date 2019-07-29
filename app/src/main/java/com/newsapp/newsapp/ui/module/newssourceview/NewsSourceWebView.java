@@ -1,4 +1,4 @@
-package com.newsapp.newsapp.module.newssourceview;
+package com.newsapp.newsapp.ui.module.newssourceview;
 
 import android.os.Bundle;
 import android.webkit.WebView;
@@ -6,7 +6,7 @@ import android.webkit.WebViewClient;
 import butterknife.BindView;
 import com.newsapp.mylibrary.BaseFragment;
 import com.newsapp.newsapp.R;
-import com.newsapp.newsapp.module.home.HomeActivity;
+import com.newsapp.newsapp.ui.module.home.HomeActivity;
 
 public class NewsSourceWebView extends BaseFragment {
 

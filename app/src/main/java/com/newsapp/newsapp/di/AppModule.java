@@ -54,7 +54,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
     return new LocalDatabase(appDatabase);
   }
 
-  @Provides @Singleton RxSingleSchedulers provideRXSingleSchedulers(){
+  @Provides @Singleton RxSingleSchedulers provideRXSingleSchedulers() {
     return RxSingleSchedulers.DEFAULT;
   }
 

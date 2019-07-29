@@ -6,13 +6,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 public abstract class PageScrollListener extends RecyclerView.OnScrollListener {
 
-  //20
-  //10
-  //9
-
-  //5
-  //5
-
   @Override public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
 
     LinearLayoutManager linearLayoutManager = (LinearLayoutManager) recyclerView.getLayoutManager();

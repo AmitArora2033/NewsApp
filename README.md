@@ -2,7 +2,7 @@
 
 NewsApp is a Android App which uses open source News API to fetch latest headlines and its detail Page.
 
-#Features
+Features
 
 - Uses Room For Caching the news headlings
 - Uses DI for Dipendency Injection
